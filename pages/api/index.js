@@ -1,4 +1,5 @@
 import database from 'database/database';
+import ValidateObject from 'libraries/global/Validate';
 import organizationSchema from 'models/organization.schema';
 
 export default async function Index(req, res) {
@@ -52,6 +53,4 @@ export default async function Index(req, res) {
       });
       break;
   }
-
-  res.status(200).json({ ok: true, data: organization });
 }
