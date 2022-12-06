@@ -50,7 +50,6 @@ export default async function API(req, res) {
           { name: browser },
           { upsert: true, new: true }
         );
-        console.log("browser_id", browser_id);
         const { _id: device_id } = await deviceSchema.findOneAndUpdate(
           { name: device },
           { name: device },
@@ -81,33 +80,32 @@ export default async function API(req, res) {
           { name: os },
           { upsert: true, new: true }
         );
-
         const usage = await usageSchema.findOneAndUpdate(
-          { route },
           {
             route,
-            // si el item existe en el array, no lo agrega, solo lo actualiza con el counter + 1 (si no existe, lo agregará con counter = 1)
-            // para qué sirve el $addToSet? para que no se repitan los items en el array
-            // para qué sirve el $each? para que no se repitan los items en el array
-            // para qué sirve el $inc? para incrementar el counter
-            // para qué sirve el $set? para actualizar el counter
+            "ips._id": ip_id,
+            "browsers._id": browser_id,
+            "devices._id": device_id,
+            "os._id": os_id,
+            "countries._id": country_id,
+            "regions._id": region_id,
+            "cities._id": city_id,
+          },
+          {
+            $inc: { count: 1 },
+            $set: { route },
             $addToSet: {
-              browsers: { $each: [{ browser_id, counter: 1 }] },
-              devices: { $each: [{ device_id, counter: 1 }] },
-              ips: { $each: [{ ip_id, counter: 1 }] },
-              countries: { $each: [{ country_id, counter: 1 }] },
-              regions: { $each: [{ region_id, counter: 1 }] },
-              cities: { $each: [{ city_id, counter: 1 }] },
-              oss: { $each: [{ os_id, counter: 1 }] },
+              ips: { _id: ip_id, count: 1 },
+              browsers: { _id: browser_id, count: 1 },
+              devices: { _id: device_id, count: 1 },
+              os: { _id: os_id, count: 1 },
+              countries: { _id: country_id, count: 1 },
+              regions: { _id: region_id, count: 1 },
+              cities: { _id: city_id, count: 1 },
             },
-
-            // si el item existe en el array, lo actualiza con el counter + 1 (si no existe, lo agregará con counter = 1)
-
-            // browsers: <Si no existe añadirlo, de lo contrario $inc +1 al counter> { browser: browser_id, counter: 1 },...así con todos los demás
           },
           { upsert: true, new: true }
         );
-
         res.status(200).json(usage);
       } catch ({ message }) {
         res.status(400).json({ error: message });
