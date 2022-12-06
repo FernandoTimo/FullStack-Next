@@ -1,10 +1,11 @@
-import style from 'styles/pages/index.module.css';
-import Head from 'heads/main.head';
-import { Body, Section, SVG } from 'components/timoideas/Timoideas.components';
-import Sockets from 'components/timoideas/Sockets.component';
-import Timoideas from 'public/svg/global/timoideas.svg';
-import GitHub from 'public/svg/global/github.svg';
-import { useState } from 'react';
+import style from "styles/pages/index.module.css";
+import Head from "heads/main.head";
+import { Body, Section, SVG } from "components/timoideas/Timoideas.components";
+import Sockets from "components/timoideas/Sockets.component";
+import Timoideas from "public/svg/global/timoideas.svg";
+import GitHub from "public/svg/global/github.svg";
+import { useState } from "react";
+import fetch from "node-fetch";
 
 export default function Index() {
   const [serverSockets, setserverSockets] = useState();
@@ -18,21 +19,21 @@ export default function Index() {
             className={`${style.Container} ${serverSockets && style.Sockets}`}
           >
             <SVG
-              heigth='5'
-              width='5'
+              heigth="5"
+              width="5"
               icon={<Timoideas />}
               className={style.Timoideas}
             />
             <h1>Timoideas</h1>
             <a
               className={style.Repo}
-              href='https://github.com/FernandoTimo/Backend-Express'
-              target='_blank'
-              type='clean'
+              href="https://github.com/FernandoTimo/Backend-Express"
+              target="_blank"
+              type="clean"
             >
               <SVG
-                heigth='3'
-                width='3'
+                heigth="3"
+                width="3"
                 icon={<GitHub />}
                 className={style.GitHub}
               />
@@ -44,4 +45,12 @@ export default function Index() {
       </Body>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      data: JSON.parse(JSON.stringify("data")),
+    },
+  };
 }
