@@ -68,11 +68,11 @@
   margin: 1vh;
   text-align: center;
   cursor: pointer;
-  background: #001d1d;
   transition: 0.3s;
+  background: #002d2d;
 }
 .PathCode:hover {
-  background: #022;
+  background: #001d1d;
 }
 .PathCode label {
   color: #0effaf;

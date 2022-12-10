@@ -1,14 +1,14 @@
-import style from './Sockets.module.css';
-import { useEffect, useState } from 'react';
-import WelcomeSockets, { handlerSocketChat } from 'sockets/Saludo.socket';
-import OffLine from 'public/svg/global/offline.svg';
-import OnLine from 'public/svg/global/online.svg';
-import GitHub from 'public/svg/global/github.svg';
+import style from "./Sockets.module.css";
+import { useEffect, useState } from "react";
+import WelcomeSockets, { handlerSocketChat } from "sockets/Saludo.socket";
+import OffLine from "public/svg/global/offline.svg";
+import OnLine from "public/svg/global/online.svg";
+import GitHub from "public/svg/global/github.svg";
 import {
   Emergente,
   Scroll,
   SVG,
-} from 'components/timoideas/Timoideas.components';
+} from "components/timoideas/Timoideas.components";
 
 function Sockets({ state }) {
   const [serverSockets, setserverSockets] = state;
@@ -29,8 +29,8 @@ function Sockets({ state }) {
           <div className={style.Title}>{serverSockets.message}</div>
           <div className={style.Mensajes}>
             <div className={style.List}>
-              <Scroll y gap={1} size={['4vh', '45vh']} scrollBar={true}>
-                {messages.messages.length > 0 &&
+              <Scroll y gap={1} size={["4vh", "45vh"]} scrollBar={true}>
+                {messages.messages?.length > 0 &&
                   messages.messages.map((message) => (
                     <div className={style.Bubble}>
                       <label className={style.SocketMessage}>
@@ -52,14 +52,14 @@ function Sockets({ state }) {
 
       <Emergente
         child={
-          <div type='popup' className={style.PopUp}>
+          <div type="popup" className={style.PopUp}>
             <a
-              href='https://github.com/FernandoTimo/Backend-Express'
-              target='_blank'
+              href="https://github.com/FernandoTimo/Backend-Express"
+              target="_blank"
             >
               <SVG
-                heigth='3'
-                width='3'
+                heigth="3"
+                width="3"
                 icon={<GitHub />}
                 className={style.GitHub}
               />
@@ -68,22 +68,22 @@ function Sockets({ state }) {
             {!serverSockets && <label>Habilítalos con estos templates</label>}
           </div>
         }
-        position={['top', 'left']}
-        translate={['0vh', 'center']}
+        position={["top", "left"]}
+        translate={["0vh", "center"]}
         openOnHover={false}
         closeOnClickOutside={true}
         closeOnEscape={true}
-        id={'Conection'}
+        id={"Conection"}
       >
         <div className={style.PathCode}>
           <SVG
-            heigth='2.5'
-            width='2.5'
+            heigth="2.5"
+            width="2.5"
             icon={serverSockets ? <OnLine /> : <OffLine />}
             className={style.Conection}
           />
           <label>
-            Sockets{serverSockets ? ' conectados' : ' desconectados'}
+            Sockets{serverSockets ? " conectados" : " desconectados"}
           </label>
         </div>
       </Emergente>

@@ -2,10 +2,10 @@ import style from "styles/pages/index.module.css";
 import Head from "heads/main.head";
 import { Body, Section, SVG } from "components/timoideas/Timoideas.components";
 import Sockets from "components/timoideas/Sockets.component";
-import Timoideas from "public/svg/global/timoideas.svg";
+import Timoideas from "public/svg/timoideas/timoideas.svg";
 import GitHub from "public/svg/global/github.svg";
 import { useState } from "react";
-import fetch from "node-fetch";
+import Analytics from "components/timoideas/Analytics.component";
 
 export default function Index() {
   const [serverSockets, setserverSockets] = useState();
@@ -15,6 +15,7 @@ export default function Index() {
       <Head />
       <Body>
         <Section>
+          <Analytics />
           <div
             className={`${style.Container} ${serverSockets && style.Sockets}`}
           >

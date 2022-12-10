@@ -1,8 +1,9 @@
 * {
   color: var(--c16);
-  font-family: 'Camsi';
+  font-family: "Camsi";
   font-weight: 400;
   letter-spacing: -1px;
+  transition: background 0.5s ease;
 }
 html {
   width: 100%;
@@ -79,7 +80,7 @@ a:hover {
   color: #fa0;
   text-decoration: underline;
 }
-a[type='clean']:hover {
+a[type="clean"]:hover {
   text-decoration: none;
 }
 h1,
@@ -115,7 +116,7 @@ input {
   background: var(--c00);
   text-transform: capitalize;
 }
-*[type='popup'] {
+*[type="popup"] {
   display: flex;
   width: max-content;
   text-align: center;

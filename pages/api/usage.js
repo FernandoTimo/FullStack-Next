@@ -24,12 +24,6 @@ export default async function API(req, res) {
       break;
     case "POST":
       try {
-        const { authorization } = req.headers;
-        if (!authorization || authorization !== process.env.USAGE_API_SEED) {
-          console.log("Unauthorized");
-          res.status(401).json({ error: "Unauthorized" });
-          return;
-        }
         const {
           route,
           ip,
@@ -44,68 +38,59 @@ export default async function API(req, res) {
             city,
           },
         } = toLowerKeysAndValues(req.body);
-
-        const { _id: browser_id } = await browserSchema.findOneAndUpdate(
-          { name: browser },
-          { name: browser },
-          { upsert: true, new: true }
+        const _ids = await Promise.all(
+          [
+            [ipSchema, ip],
+            [browserSchema, browser],
+            [deviceSchema, device],
+            [countrySchema, country],
+            [regionSchema, region],
+            [citySchema, city],
+            [osSchema, os],
+          ].map(async ([schema, value]) => {
+            const { _id } = await schema.findOneAndUpdate(
+              { name: value },
+              { name: value },
+              { upsert: true, new: true }
+            );
+            return _id;
+          })
         );
-        const { _id: device_id } = await deviceSchema.findOneAndUpdate(
-          { name: device },
-          { name: device },
-          { upsert: true, new: true }
-        );
-        const { _id: ip_id } = await ipSchema.findOneAndUpdate(
-          { name: ip },
-          { name: ip },
-          { upsert: true, new: true }
-        );
-        const { _id: country_id } = await countrySchema.findOneAndUpdate(
-          { name: country },
-          { name: country },
-          { upsert: true, new: true }
-        );
-        const { _id: region_id } = await regionSchema.findOneAndUpdate(
-          { name: region },
-          { name: region },
-          { upsert: true, new: true }
-        );
-        const { _id: city_id } = await citySchema.findOneAndUpdate(
-          { name: city },
-          { name: city },
-          { upsert: true, new: true }
-        );
-        const { _id: os_id } = await osSchema.findOneAndUpdate(
-          { name: os },
-          { name: os },
-          { upsert: true, new: true }
-        );
-        const usage = await usageSchema.findOneAndUpdate(
-          {
-            route,
-            "ips._id": ip_id,
-            "browsers._id": browser_id,
-            "devices._id": device_id,
-            "os._id": os_id,
-            "countries._id": country_id,
-            "regions._id": region_id,
-            "cities._id": city_id,
-          },
-          {
-            $inc: { count: 1 },
-            $set: { route },
-            $addToSet: {
-              ips: { _id: ip_id, count: 1 },
-              browsers: { _id: browser_id, count: 1 },
-              devices: { _id: device_id, count: 1 },
-              os: { _id: os_id, count: 1 },
-              countries: { _id: country_id, count: 1 },
-              regions: { _id: region_id, count: 1 },
-              cities: { _id: city_id, count: 1 },
-            },
-          },
-          { upsert: true, new: true }
-        );
+        const usage_keys = [
+          ["ips", "ip"],
+          ["browsers", "browser"],
+          ["devices", "device"],
+          ["countries", "country"],
+          ["regions", "region"],
+          ["cities", "city"],
+          ["oss", "os"],
+        ];
+        const usage = await usageSchema
+          .findOne({ route }, (err, doc) => {
+            if (err) return console.log(err);
+            if (doc) {
+              usage_keys.forEach(([_p , _s], i) => {
+                doc[_p].find((elem) => elem[_s].equals(_ids[i]))
+                  ? doc[_p].find((elem) => elem[_s].equals(_ids[i])).counter++
+                  : doc[_p].push({ [_s]: _ids[i], counter: 1 });
+              });
+              console.log("err");
+              doc.save();
+            } else {
+              const newusage = new usageSchema({
+                route,
+                ...usage_keys.reduce(
+                  (acc, [_p, _s], i) => ({
+                    ...acc,
+                    [_p]: [{ [_s]: _ids[i], counter: 1 }],
+                  }),
+                  {}
+                ),
+              });
+              newusage.save();
+            }
+          })
+          .clone();
         res.status(200).json(usage);
       } catch ({ message }) {
         res.status(400).json({ error: message });

@@ -1,33 +1,46 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 /**
  * ⚡ Hoook useLocalStorage ⚡ Maneja el localStorage del navegador
  * @param {String} key Key del localStorage 🔥 requiered = true
  * @param {(String|Number|Array)} [value] Valor con el que se actualizará el item
  * @returns {String}
  */
-export default function useLocalStorage(key, value = '') {
-  if (!key || typeof key != 'string' || !!!key.trim()) {
+
+export default function useLocalStorage(key, initialValue = "") {
+  if (!key || typeof key != "string" || !!!key.trim()) {
     throw new Error(
-      '⚡ useLocalStorage => Proporciona un valor de tipo string como parámetro, ejemplo: useLocalStorage("Theme") ⚡'
+      '⚡ useLocalStorage => Proporciona una key de tipo string como parámetro, ejemplo: useLocalStorage("key", "value") ⚡'
     );
   }
-  const [Value, setValue] = useState('');
-  // Esteblece valores de inicio
+  const [storedValue, setStoredValue] = useState();
   useEffect(() => {
-    // La key no existe en el localStorage
-    if (!!!localStorage[key]) {
-      localStorage[key] = value;
-      setValue(value);
-    }
-    // La key existe en el localStorage
-    else {
-      setValue(localStorage[key]);
+    try {
+      if (!localStorage[key]) {
+        localStorage[key] = JSON.stringify(initialValue);
+        setStoredValue(initialValue);
+      } else {
+        setStoredValue(JSON.parse(localStorage[key]));
+      }
+    } catch (error) {
+      setStoredValue(initialValue);
     }
   }, []);
-  // Cambia el valor del localStorage
-  useEffect(() => {
-    localStorage[key] = Value;
-  }, [Value]);
 
-  return [Value, setValue];
+  const setValue = (value) => {
+    try {
+      if (value instanceof Function) {
+        setStoredValue((prev) => {
+          const newValue = value(prev);
+          localStorage[key] = JSON.stringify(newValue);
+          return newValue;
+        });
+      } else {
+        setStoredValue(value);
+        localStorage[key] = value;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return [storedValue, setValue];
 }
