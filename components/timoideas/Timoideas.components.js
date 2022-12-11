@@ -7,14 +7,14 @@ import {
   useCallback,
   isValidElement,
   useLayoutEffect,
-} from 'react';
+} from "react";
 const randomBG = () => {
   let hexadecimal = Math.random().toString(16).slice(2, 8);
-  return '#' + hexadecimal;
+  return "#" + hexadecimal;
 };
 export function Body({ show, children }) {
   return (
-    <div className='Body' style={{ boxShadow: show && 'var(--show)' }}>
+    <div className="Body" style={{ boxShadow: show && "var(--show)" }}>
       {children}
     </div>
   );
@@ -22,11 +22,11 @@ export function Body({ show, children }) {
 export function Section({ show, size, children }) {
   return (
     <section
-      className='Section'
+      className="Section"
       style={{
-        boxShadow: show && 'var(--show-section)',
-        height: size ? `${size}00vh` : 'auto',
-        minHeight: size ? `${size}00vh` : '100vh',
+        boxShadow: show && "var(--show-section)",
+        height: size ? `${size}00vh` : "auto",
+        minHeight: size ? `${size}00vh` : "100vh",
       }}
     >
       {children}
@@ -38,21 +38,21 @@ export function Content({
   pd,
   row,
   flex,
-  center = '',
-  className = '',
+  center = "",
+  className = "",
   style = {},
   children,
 }) {
-  if (!children) console.warn('<Content></Content> sin contenido');
-  let clases = `Content${center && ' c'}${className && ' ' + className}`;
+  if (!children) console.warn("<Content></Content> sin contenido");
+  let clases = `Content${center && " c"}${className && " " + className}`;
   return (
     <div
       className={clases}
       style={{
         ...style,
-        padding: pd && pd + 'vh',
-        flexDirection: row && 'row',
-        boxShadow: show && 'var(--show-content)',
+        padding: pd && pd + "vh",
+        flexDirection: row && "row",
+        boxShadow: show && "var(--show-content)",
         flex: flex || 1,
       }}
     >
@@ -64,9 +64,9 @@ export function Content({
 export function Header({ height = 10, children }) {
   return (
     <header
-      className='Header'
+      className="Header"
       style={{
-        height: height + 'vh',
+        height: height + "vh",
       }}
     >
       {children}
@@ -76,9 +76,9 @@ export function Header({ height = 10, children }) {
 export function Footer({ bg, height = 10, children }) {
   return (
     <footer
-      className='Footer'
+      className="Footer"
       style={{
-        height: height + 'vh',
+        height: height + "vh",
       }}
     >
       {children}
@@ -86,10 +86,10 @@ export function Footer({ bg, height = 10, children }) {
   );
 }
 
-export function Controls({ top = 1, row = 'column', children }) {
+export function Controls({ top = 1, row = "column", children }) {
   return (
     <div
-      className='ControlsContainer'
+      className="ControlsContainer"
       style={{ zIndex: top, flexDirection: row }}
     >
       {children}
@@ -97,23 +97,23 @@ export function Controls({ top = 1, row = 'column', children }) {
   );
 }
 export function Modal({
-  className = '',
+  className = "",
   show = true,
   handlerFunction = () => {},
   closeOnClickOutside = true,
   closeOnEsc = true,
-  portal = '__next',
+  portal = "__next",
   children,
 }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (closeOnEsc && e.key === 'Escape') {
+      if (closeOnEsc && e.key === "Escape") {
         handlerFunction(false);
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
   // Mount on client side
@@ -123,7 +123,7 @@ export function Modal({
     return () => setMounted(false);
   }, [show]);
 
-  const clases = `ModalContainer ${className && ' ' + className}`;
+  const clases = `ModalContainer ${className && " " + className}`;
 
   return mounted && show
     ? reactDom.createPortal(
@@ -134,7 +134,7 @@ export function Modal({
               handlerFunction(!show);
             }
           }}
-          style={{ pointerEvents: closeOnClickOutside ? 'auto' : 'none' }}
+          style={{ pointerEvents: closeOnClickOutside ? "auto" : "none" }}
         >
           {children}
         </div>,
@@ -148,28 +148,28 @@ export function ColorPicker({
   active = [false, () => {}, true],
   children,
 }) {
-  const [CurrentColor, setCurrentColor] = useState('FA0');
+  const [CurrentColor, setCurrentColor] = useState("FA0");
   const [CurrentXPosition, setCurrentXPosition] = useState(0);
   const [CurrentYPosition, setCurrentYPosition] = useState(0);
   return (
-    <div className='c'>
+    <div className="c">
       {children}
       <div
-        className='ColorPicker'
+        className="ColorPicker"
         style={{
           opacity: active[0] ? 1 : 0,
-          pointerEvents: active[0] ? 'visible' : 'none',
-          marginTop: position[0] + 'vh',
-          marginRight: position[1] + 'vh',
-          marginBottom: position[2] + 'vh',
-          marginLeft: position[3] + 'vh',
+          pointerEvents: active[0] ? "visible" : "none",
+          marginTop: position[0] + "vh",
+          marginRight: position[1] + "vh",
+          marginBottom: position[2] + "vh",
+          marginLeft: position[3] + "vh",
         }}
       >
-        <div className='ColorPickerContainer'>
-          <div className='CurrentColorContainer'>
+        <div className="ColorPickerContainer">
+          <div className="CurrentColorContainer">
             <div
-              className='CurrentColorColor'
-              style={{ background: '#' + CurrentColor }}
+              className="CurrentColorColor"
+              style={{ background: "#" + CurrentColor }}
               onMouseDown={(e) => {
                 setCurrentXPosition(
                   e.clientX - e.target.getBoundingClientRect().left
@@ -179,10 +179,10 @@ export function ColorPicker({
                 );
               }}
             ></div>
-            <div className='CurrentColorSaturation'></div>
-            <div className='CurrentColorBrightness'></div>
+            <div className="CurrentColorSaturation"></div>
+            <div className="CurrentColorBrightness"></div>
             <div
-              className='CurrentColorPreview'
+              className="CurrentColorPreview"
               onDrag={(e) => {
                 setCurrentXPosition(
                   e.clientX - e.target.getBoundingClientRect().left
@@ -197,7 +197,7 @@ export function ColorPicker({
                 // top: CurrentYPosition + 'px',
               }}
             >
-              <span style={{ background: '#' + CurrentColor }} />
+              <span style={{ background: "#" + CurrentColor }} />
             </div>
           </div>
         </div>
@@ -208,7 +208,7 @@ export function ColorPicker({
 
 export function Card({ bg, children }) {
   return (
-    <div className='Card' style={{ background: bg ? randomBG() : '#fafafa' }}>
+    <div className="Card" style={{ background: bg ? randomBG() : "#fafafa" }}>
       {children}
     </div>
   );
@@ -239,9 +239,9 @@ export function Form({ title, children }) {
     }
   });
   return (
-    <form className='Form' onSubmit={handleSubmit}>
-      <div className='TitleFormContainer'>
-        <h1 className='TitleForm'>{title || 'Formulario'}</h1>
+    <form className="Form" onSubmit={handleSubmit}>
+      <div className="TitleFormContainer">
+        <h1 className="TitleForm">{title || "Formulario"}</h1>
       </div>
       {childs}
     </form>
@@ -253,13 +253,13 @@ export function Input_1({ func, type, children, required }) {
   const objKey = type;
 
   let nombre;
-  if (type === 'username' || type === 'name') {
+  if (type === "username" || type === "name") {
     nombre = type;
-    type = 'text';
+    type = "text";
   }
-  if (type === 'edad' || type === 'tel') {
+  if (type === "edad" || type === "tel") {
     nombre = type;
-    type = 'number';
+    type = "number";
   }
   const handleChange = (e) => {
     setobjValue(e.target.value);
@@ -267,12 +267,12 @@ export function Input_1({ func, type, children, required }) {
     console.log(objKey);
   };
   return (
-    <div className='input_1'>
+    <div className="input_1">
       <input
-        type={type ? type : 'text'}
-        spellCheck='false'
+        type={type ? type : "text"}
+        spellCheck="false"
         required={required ? false : true}
-        name={nombre || 'input'}
+        name={nombre || "input"}
         onChange={handleChange}
       />
       <span></span>
@@ -295,11 +295,11 @@ export function Boton_1({ children }) {
   };
   return (
     <>
-      <button className='Boton_1' onClick={createRiple}>
+      <button className="Boton_1" onClick={createRiple}>
         <div>{children}</div>
         {click ? (
           <span
-            style={{ left: X, top: Y, animation: 'riples .8s linear forwards' }}
+            style={{ left: X, top: Y, animation: "riples .8s linear forwards" }}
           ></span>
         ) : null}
       </button>
@@ -307,15 +307,15 @@ export function Boton_1({ children }) {
   );
 }
 
-import Ligth from 'public/theme/Ligth.json';
-import Dark from 'public/theme/Dark.json';
-import useCounter from 'hooks/useCounter.hook';
-import reactDom from 'react-dom';
+import Ligth from "public/theme/Ligth.json";
+import Dark from "public/theme/Dark.json";
+import useCounter from "hooks/useCounter.hook";
+import reactDom from "react-dom";
 
 export function Theme() {
   useEffect(() => {
     !!localStorage.Theme
-      ? setRoot(localStorage.Theme === 'Dark' ? Dark : Ligth)
+      ? setRoot(localStorage.Theme === "Dark" ? Dark : Ligth)
       : setSystem();
   }, []);
   const setRoot = (obj) => {
@@ -324,24 +324,24 @@ export function Theme() {
     });
   };
   const setDark = () => {
-    localStorage.Theme = 'Dark';
+    localStorage.Theme = "Dark";
     setRoot(Dark);
   };
   const setLigth = () => {
-    localStorage.Theme = 'Ligth';
+    localStorage.Theme = "Ligth";
     setRoot(Ligth);
   };
   const setSystem = () => {
-    let sysPref = window.matchMedia('(prefers-color-scheme: dark)');
+    let sysPref = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = (e) => {
       e.matches ? setDark() : setLigth();
     };
-    sysPref.removeEventListener('change', handler);
-    sysPref.addEventListener('change', handler);
+    sysPref.removeEventListener("change", handler);
+    sysPref.addEventListener("change", handler);
     handler(sysPref);
   };
   return (
-    <div className='ThemeContainer'>
+    <div className="ThemeContainer">
       <span onClick={setSystem}>💻</span>
       <span onClick={setLigth}>🌖</span>
       <span onClick={setDark}>🌒</span>
@@ -352,10 +352,10 @@ export function Theme() {
 //         <===                                                        [ Spinners ]
 //            <--************************************************************************************************** [ Spinners ]
 
-export function Spinner_Trino({ speed, size, background = '#fafafa' }) {
+export function Spinner_Trino({ speed, size, background = "#fafafa" }) {
   const Elemento = (
     <div
-      className='Elementos'
+      className="Elementos"
       style={{
         background: background,
         // transform: `scale(8)`,
@@ -364,14 +364,14 @@ export function Spinner_Trino({ speed, size, background = '#fafafa' }) {
   );
   return (
     <div
-      className='SpinnerContainer'
+      className="SpinnerContainer"
       style={{
-        animationDuration: speed ? `${speed}s` : '1s',
+        animationDuration: speed ? `${speed}s` : "1s",
         // transform: `scale(8)`,
       }}
     >
-      <div className='Cabeza'>{Elemento}</div>
-      <div className='Falda'>
+      <div className="Cabeza">{Elemento}</div>
+      <div className="Falda">
         {Elemento}
         {Elemento}
       </div>
@@ -381,10 +381,10 @@ export function Spinner_Trino({ speed, size, background = '#fafafa' }) {
 export function Spinner_Rainbow({ size = 1.5, speed = 0.3 }) {
   return (
     <div
-      className='SpinnerRainbowContainer'
+      className="SpinnerRainbowContainer"
       style={{
-        width: size + 'vh',
-        height: size + 'vh',
+        width: size + "vh",
+        height: size + "vh",
         boxShadow: `0 0 ${Math.round(size / 15)}vh #0003,
            inset 0 0 ${Math.round(size / 35)}vh #0004`,
         border: `${size / 60}vh solid #fafafa`,
@@ -403,19 +403,19 @@ export function Spinner_Rainbow({ size = 1.5, speed = 0.3 }) {
   );
 }
 export function Rainbow({
-  padding = '.5vh 2vh',
+  padding = ".5vh 2vh",
   size = 0.2,
-  bg = '#1a1a1a',
+  bg = "#1a1a1a",
   border = 1,
   children,
 }) {
   return (
     <div
-      className='RainbowContainer'
+      className="RainbowContainer"
       style={{ padding: `${size}vh ${size}vh`, borderRadius: `${border}vh` }}
     >
       <div
-        className='Rainbow'
+        className="Rainbow"
         style={{
           padding: padding,
           background: bg,
@@ -429,14 +429,14 @@ export function Rainbow({
 }
 export function Poligon({
   children,
-  size = '100%',
-  className = '',
+  size = "100%",
+  className = "",
   sides = 8,
   bg,
 }) {
-  let clases = `Poligono${className && ' ' + className}`;
+  let clases = `Poligono${className && " " + className}`;
   return (
-    <div className='PoligonoContainer' style={{ width: size, height: size }}>
+    <div className="PoligonoContainer" style={{ width: size, height: size }}>
       <div
         className={clases}
         style={{
@@ -445,7 +445,7 @@ export function Poligon({
           background: bg || randomBG(),
         }}
       >
-        <div className='PoligonoContent'>{children}</div>
+        <div className="PoligonoContent">{children}</div>
       </div>
     </div>
   );
@@ -460,23 +460,23 @@ export function Animation({
   // animate = false,
   width = 100,
   height = 100,
-  script = 'script/Losa.js',
-  id = '2367616E571929429CB3B8A1959D9915',
+  script = "script/Losa.js",
+  id = "2367616E571929429CB3B8A1959D9915",
 }) {
   // console.log(typeof dasdwq);
   return (
     <div
-      className='AnimationContainer'
-      id='animation_container'
+      className="AnimationContainer"
+      id="animation_container"
       // ref={ContainerRef}
     >
       <canvas
-        id='canvas'
+        id="canvas"
         // ref={CanvasRef} width="500"
         height={height}
       ></canvas>
       <div
-        id='dom_overlay_container'
+        id="dom_overlay_container"
         // ref={OverlayRef}
         style={{ width: `${width}px`, height: `${height}px` }}
       ></div>
@@ -486,36 +486,35 @@ export function Animation({
 }
 export function Timoideas() {
   return (
-    <div className='Timoideas'>
+    <div className="Timoideas">
       <img
-        alt='Timoideas Logo'
-        className='TimoideasLogo'
-        src='images/Timoideas.png'
+        alt="Timoideas Logo"
+        className="TimoideasLogo"
+        src="images/Timoideas.png"
       />
     </div>
   );
 }
 export function Emergente({
-  position = ['top', 'left'],
-  translate = ['0vh', '0vh'],
+  position = ["top", "left"],
+  translate = ["0vh", "0vh"],
   child,
-  className = '',
-  id = '',
-  group = '',
+  className = "",
+  id = "",
+  group = "",
   closeOnEsc = false,
   closeOnClickOutside = false,
   openOnHover = false,
-
   children,
 }) {
   const target_group = `target_emergente_${group}`;
   const [EmergenteState, setEmergenteState] = useState(false);
   const toggleEmergenteState = useCallback((e) => {
-    if (e.target.attributes.role?.value === 'prevent') return;
+    if (e.target.attributes.role?.value === "prevent") return;
     else {
       setEmergenteState((state) => {
-        group && (localStorage.target_emergente = state ? '' : group);
-        id && (localStorage[target_group] = state ? '' : id);
+        group && (localStorage.target_emergente = state ? "" : group);
+        id && (localStorage[target_group] = state ? "" : id);
         return !state;
       });
     }
@@ -533,7 +532,7 @@ export function Emergente({
     // localStorage.target_emergente === group && setEmergenteState(true);
     // close on escape
     const handleKeyDown = (e) => {
-      if (closeOnEsc && e.key === 'Escape') {
+      if (closeOnEsc && e.key === "Escape") {
         setEmergenteState(false);
       }
     };
@@ -548,30 +547,30 @@ export function Emergente({
       }
     };
     // window.addEventListener('click', handleClick);
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     localStorage[target_group] === id && setEmergenteState(true);
     return () => {
-      window.removeEventListener('click', handleClick);
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("click", handleClick);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
   useEffect(() => {
     const handlerClick = (e) => {
       if (
         localStorage[target_group] !== id &&
-        e.target.attributes.role?.value !== 'prevent'
+        e.target.attributes.role?.value !== "prevent"
       ) {
         setEmergenteState(false);
       }
-      if (e.target.attributes.role?.value === 'close') {
-        localStorage[target_group] = '';
+      if (e.target.attributes.role?.value === "close") {
+        localStorage[target_group] = "";
         setEmergenteState(false);
       }
     };
-    EmergenteState && window.addEventListener('click', handlerClick);
+    EmergenteState && window.addEventListener("click", handlerClick);
     return () => {
-      window.removeEventListener('click', handlerClick);
+      window.removeEventListener("click", handlerClick);
     };
   }, [EmergenteState]);
 
@@ -595,17 +594,17 @@ export function Emergente({
       });
     }
   });
-  const isCenterX = translate[1] === 'center';
-  const isCenterY = translate[0] === 'center';
+  const isCenterX = translate[1] === "center";
+  const isCenterY = translate[0] === "center";
 
   const VerticalTranslate = isCenterY
-    ? '50%'
+    ? "50%"
     : EmergenteState
     ? `${translate[0]}`
     : `calc(${translate[0]} + 1vh)`;
 
   const HorizontalTranslate = isCenterX
-    ? '50%'
+    ? "50%"
     : EmergenteState
     ? `${translate[1]}`
     : `calc(${translate[1]} + 1vh)`;
@@ -613,35 +612,35 @@ export function Emergente({
   return (
     <div
       className={className}
-      style={{ position: 'relative' }}
+      style={{ position: "relative" }}
       ref={refEmergente}
     >
       <div
-        className='Emergente'
+        className="Emergente"
         style={{
           opacity: EmergenteState ? 1 : 0,
-          pointerEvents: EmergenteState ? 'visible' : 'none',
+          pointerEvents: EmergenteState && !openOnHover ? "visible" : "none",
           transform: `translate(${
             isCenterX
-              ? position[1] === 'left'
-                ? '-50%'
-                : '50%'
-              : position[1] === 'left'
-              ? '-100%'
-              : '100%'
+              ? position[1] === "left"
+                ? "-50%"
+                : "50%"
+              : position[1] === "left"
+              ? "-100%"
+              : "100%"
           }, ${
             isCenterY
-              ? position[0] === 'top'
-                ? '-50%'
-                : '50%'
-              : position[0] === 'top'
-              ? '-100%'
-              : '100%'
+              ? position[0] === "top"
+                ? "-50%"
+                : "50%"
+              : position[0] === "top"
+              ? "-100%"
+              : "100%"
           }) scale(${EmergenteState ? 1 : 0.95})`,
-          top: position[0] === 'top' ? VerticalTranslate : null,
-          right: position[1] === 'right' ? HorizontalTranslate : null,
-          bottom: position[0] === 'bottom' ? VerticalTranslate : null,
-          left: position[1] === 'left' ? HorizontalTranslate : null,
+          top: position[0] === "top" ? VerticalTranslate : null,
+          right: position[1] === "right" ? HorizontalTranslate : null,
+          bottom: position[0] === "bottom" ? VerticalTranslate : null,
+          left: position[1] === "left" ? HorizontalTranslate : null,
         }}
       >
         {child}
@@ -652,22 +651,22 @@ export function Emergente({
 }
 export function Grid({
   children,
-  center = '',
+  center = "",
   gap = 0,
-  className = '',
+  className = "",
   rows = [0, 5],
   columns = [0, 5],
   show,
 }) {
-  let clases = `Grid${center && ' c'}${className && ' ' + className}`;
+  let clases = `Grid${center && " c"}${className && " " + className}`;
 
   // columns[0] > 0 ? console.log('mayor') : console.log('menor');
   return (
     <div
       className={clases}
       style={{
-        boxShadow: show && 'var(--show-grid)',
-        gap: gap + 'vh',
+        boxShadow: show && "var(--show-grid)",
+        gap: gap + "vh",
         // gridTemplateColumns: 'repeat(auto-fit, minmax(15vh, 1fr)) !important',
         // gridTemplateRows: `repeat(${
         //   rows[0] > 0
@@ -682,17 +681,17 @@ export function Grid({
 }
 export function Scroll({
   children,
-  x = '',
-  y = '',
-  size = ['5vh', '10vh'],
-  className = '',
+  x = "",
+  y = "",
+  size = ["5vh", "10vh"],
+  className = "",
   gap,
   show,
   scrollBar = false,
 }) {
   let clases = `Scroll ${
-    scrollBar ? ' ScrollBarActive' : ' ScrollBarInactive'
-  }${className && ' ' + className}`;
+    scrollBar ? " ScrollBarActive" : " ScrollBarInactive"
+  }${className && " " + className}`;
   const refScroll = useRef();
   const childrenlength = Children.count(children);
   useEffect(() => {
@@ -705,11 +704,11 @@ export function Scroll({
     <div
       className={clases}
       style={{
-        outline: show && '1px solid #aae',
-        overflowX: x ? 'scroll' : 'auto',
-        overflowY: y ? 'scroll' : 'auto',
-        gap: gap && gap + 'vh',
-        flexDirection: x ? 'row' : 'column',
+        outline: show && "1px solid #aae",
+        overflowX: x ? "scroll" : "auto",
+        overflowY: y ? "scroll" : "auto",
+        gap: gap && gap + "vh",
+        flexDirection: x ? "row" : "column",
         minWidth: x && size[0],
         maxWidth: x && size[1],
         minHeight: y && size[0],
@@ -734,27 +733,27 @@ export function SVG({
   width = 5,
   height = 5,
   icon,
-  className = '',
+  className = "",
   onClick = () => {},
   onContextMenu = () => {},
 }) {
-  let clases = `SVGIcon${className && ' ' + className}`;
+  let clases = `SVGIcon${className && " " + className}`;
   return (
     <div
       className={clases}
       onClick={onClick}
       onContextMenu={onContextMenu}
       style={{
-        width: width + 'vh',
-        height: height + 'vh',
+        width: width + "vh",
+        height: height + "vh",
       }}
     >
       {icon}
     </div>
   );
 }
-export function Masonry({ gap = 1, children, className = '', columns = 5 }) {
-  const clases = `Masonry${className && ' ' + className}`;
+export function Masonry({ gap = 1, children, className = "", columns = 5 }) {
+  const clases = `Masonry${className && " " + className}`;
   const [ChildrenArray, setChildrenArray] = useState([]);
   const [columnsNumber, setColumnsNumber] = useState(columns);
   const [ReadyToRender, setReadyToRender] = useState(false);
@@ -766,28 +765,28 @@ export function Masonry({ gap = 1, children, className = '', columns = 5 }) {
     ) {
       const handlerResize = () => {
         setColumnsNumber(
-          window.matchMedia('(orientation: landscape)').matches ? 5 : 2
+          window.matchMedia("(orientation: landscape)").matches ? 5 : 2
         );
       };
       handlerResize();
-      window.addEventListener('resize', handlerResize);
+      window.addEventListener("resize", handlerResize);
     } else {
       const handlerResize = () => {
         setColumnsNumber(
-          (window.matchMedia('(min-width: 1600px)').matches && 5) ||
-            (window.matchMedia('(min-width: 1200px)').matches && 4) ||
-            (window.matchMedia('(min-width: 992px)').matches && 3) ||
-            (window.matchMedia('(min-width: 768px)').matches && 3) ||
-            (window.matchMedia('(min-width: 576px)').matches && 2) ||
-            (window.matchMedia('(min-width: 0px)').matches && 1)
+          (window.matchMedia("(min-width: 1600px)").matches && 5) ||
+            (window.matchMedia("(min-width: 1200px)").matches && 4) ||
+            (window.matchMedia("(min-width: 992px)").matches && 3) ||
+            (window.matchMedia("(min-width: 768px)").matches && 3) ||
+            (window.matchMedia("(min-width: 576px)").matches && 2) ||
+            (window.matchMedia("(min-width: 0px)").matches && 1)
         );
       };
       handlerResize();
-      window.addEventListener('resize', handlerResize);
+      window.addEventListener("resize", handlerResize);
     }
     setReadyToRender(true);
     return () => {
-      window.removeEventListener('resize', handlerResize);
+      window.removeEventListener("resize", handlerResize);
     };
   }, [columns]);
 
@@ -816,10 +815,10 @@ export function Masonry({ gap = 1, children, className = '', columns = 5 }) {
   }, [ReadyToRender, columnsNumber]);
 
   return (
-    <div className={clases} style={{ gap: gap + 'vh', padding: gap + 'vh' }}>
+    <div className={clases} style={{ gap: gap + "vh", padding: gap + "vh" }}>
       {ReadyToRender &&
         ChildrenArray.map((childrenColumn, i) => (
-          <div className='MasonryColumn' style={{ gap: gap + 'vh' }} key={i}>
+          <div className="MasonryColumn" style={{ gap: gap + "vh" }} key={i}>
             {childrenColumn.map((child) => child)}
           </div>
         ))}
@@ -827,19 +826,19 @@ export function Masonry({ gap = 1, children, className = '', columns = 5 }) {
   );
 }
 export function Fixed({ children }) {
-  return <div className='FixedContainer'>{children}</div>;
+  return <div className="FixedContainer">{children}</div>;
 }
 export function PopUp({
   children,
-  size = ['30vh', '30vh'],
-  className = '',
-  bg = 'var(--c00)',
-  shadow = 'var(--shadow)',
-  radius = '3vh',
-  direction = 'bottom',
+  size = ["30vh", "30vh"],
+  className = "",
+  bg = "var(--c00)",
+  shadow = "var(--shadow)",
+  radius = "3vh",
+  direction = "bottom",
 }) {
-  let clases = `PopUp${className && ' ' + className}${
-    direction && ' PopUp' + direction
+  let clases = `PopUp${className && " " + className}${
+    direction && " PopUp" + direction
   }`;
   return (
     <div

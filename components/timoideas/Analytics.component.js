@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import style from "./Analytics.module.css";
 import AnalyticsIcon from "public/svg/timoideas/analytics.svg";
 import { SVG } from "./Timoideas.components";
+import CalendarChart from "./CalendarChart.component";
 
 export default function Analytics({ button = true }) {
   const [IsVisible, setIsVisible] = useLocalStorage("analytics", true);
@@ -39,13 +40,15 @@ export default function Analytics({ button = true }) {
         }`}
       >
         <h2>Analytics</h2>
+        <CalendarChart />
       </div>
       {button && (
         <button
           className={style.Button}
           onClick={() => setIsVisible(!IsVisible)}
         >
-          <SVG height="30px" width="30px" icon={<AnalyticsIcon />} />
+          {/* <SVG height="30px" width="30px" icon={<AnalyticsIcon />} /> */}
+          {/* <div className={style.BlurBg}></div> */}
         </button>
       )}
     </div>

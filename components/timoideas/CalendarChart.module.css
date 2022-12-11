@@ -1,8 +1,65 @@
 /* Phone */
 .Container {
-	
+  --gap: 2px;
+  border: 0.2vh solid var(--c06);
+  border-radius: 5px;
 }
-
+.Calendar {
+  gap: 5px;
+  flex-direction: column;
+  padding: 5px;
+}
+.CalendarHeader {
+  width: 100%;
+  justify-content: space-around;
+}
+.CalendarBody {
+}
+.CalendarWeek {
+  flex-direction: column;
+}
+.CalendarDay {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: var(--c06);
+  margin: var(--gap);
+}
+.CalendarDay__Detail {
+  border-radius: 5px;
+  width: 120px;
+  height: 30px;
+  background: var(--c08);
+  gap: 4px;
+}
+.CalendarDay__Detail::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--c08);
+  bottom: 0;
+  transform: translate(0%, 50%) rotate(45deg);
+  border-radius: 0 0 3px 0;
+}
+.CalendarDay[data-level="0"] {
+  background: var(--c05);
+}
+.CalendarDay[data-level="1"] {
+  background: var(--c-GraphCalendar-L1);
+}
+.CalendarDay[data-level="2"] {
+  background: var(--c-GraphCalendar-L2);
+}
+.CalendarDay[data-level="3"] {
+  background: var(--c-GraphCalendar-L3);
+}
+.CalendarDay[data-level="4"] {
+  background: var(--c-GraphCalendar-L4);
+}
+.CalendarDay:hover {
+  opacity: 0.8;
+}
 /* Tablet */
 @media (min-width: 576px) {
 }

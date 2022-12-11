@@ -8,14 +8,12 @@
   transform: translate(0%, 50%) scale(0.95);
   bottom: 52%;
   border-radius: 15px;
-  transition: 0.3s ease-out;
   opacity: 0;
   pointer-events: none;
   border: 0.2vh solid #38f;
 }
 .Container * {
   opacity: 0;
-  transition: 0.1s;
 }
 .ContainerActive {
   pointer-events: visible;
@@ -26,8 +24,8 @@
 .ContainerActive * {
   opacity: 1;
 }
-
 .Button {
+  transition: 0.3s;
   position: absolute;
   opacity: 1 !important;
   bottom: 20px;
@@ -36,11 +34,16 @@
   height: 60px;
   border-radius: 30px;
   background: var(--c20);
-  transition: 0.3s;
 }
 .Icon svg path {
   fill: var(--c20);
   fill: #38f !important;
+}
+.BlurBg {
+  background: #fa0;
+  width: 30px;
+  height: 30px;
+  backdrop-filter: blur(3px);
 }
 /* Tablet */
 @media (min-width: 576px) {

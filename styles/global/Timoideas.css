@@ -1,6 +1,5 @@
 html {
   scroll-behavior: smooth;
-  background: var(--c00);
 }
 * {
   user-select: none;
@@ -964,7 +963,7 @@ html {
   padding: 0.3vh 0.7vh;
   font-size: 14px;
   font-weight: 500;
-  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   position: absolute;
   margin-top: 4vh;
 }
@@ -1153,7 +1152,7 @@ html {
 }
 .PopUp::before {
   transition: 0.3s;
-  content: '';
+  content: "";
   position: absolute;
   width: 2vh;
   height: 2vh;
@@ -1179,7 +1178,7 @@ html {
 }
 
 .PopUp::after {
-  content: '';
+  content: "";
   position: absolute;
   background: var(--c00);
   z-index: 1;

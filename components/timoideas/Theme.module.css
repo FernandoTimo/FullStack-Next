@@ -1,9 +1,25 @@
 /* Phone */
 .Container {
   width: 8vh;
-  right: 0;
-  top: 0;
+  right: 50%;
+  top: 10px;
   position: fixed;
+  transform: translate(50%, 0%);
+  flex-direction: column;
+  z-index: 4000;
+}
+.Theme {
+  transition: 0.3s;
+  background: var(--c01);
+  padding: 10px;
+  gap: 10px;
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+}
+.Theme span {
+  font-size: 20px;
+  line-height: 20px;
+  cursor: pointer;
 }
 
 /* Tablet */
