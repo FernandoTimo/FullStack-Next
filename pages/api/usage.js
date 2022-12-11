@@ -69,12 +69,11 @@ export default async function API(req, res) {
           .findOne({ route }, (err, doc) => {
             if (err) return console.log(err);
             if (doc) {
-              usage_keys.forEach(([_p , _s], i) => {
+              usage_keys.forEach(([_p, _s], i) => {
                 doc[_p].find((elem) => elem[_s].equals(_ids[i]))
                   ? doc[_p].find((elem) => elem[_s].equals(_ids[i])).counter++
                   : doc[_p].push({ [_s]: _ids[i], counter: 1 });
               });
-              console.log("err");
               doc.save();
             } else {
               const newusage = new usageSchema({

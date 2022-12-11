@@ -65,9 +65,9 @@ export default function CalendarChart({
                   translate={["-10px", "center"]}
                   group={"_dayCharCalendar"}
                   id={"_dayCharCalendar"}
+                  key={index}
                 >
                   <span
-                    key={index}
                     className={style.CalendarDay}
                     data-level={
                       // random number between 0 and 4
