@@ -1,10 +1,10 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import style from "./Theme.module.css";
 import Ligth from "public/theme/Ligth.json";
 import Dark from "public/theme/Dark.json";
 export default function Theme() {
   // Establecer valor inicial del tema con el LocalStorage o con el valor del sistema
-  useLayoutEffect(() => {
+  useEffect(() => {
     !!localStorage.Theme
       ? setRoot(localStorage.Theme === "Dark" ? Dark : Ligth)
       : setSystem();
