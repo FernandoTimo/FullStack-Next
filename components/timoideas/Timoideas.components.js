@@ -352,6 +352,46 @@ export function Theme() {
 //         <===                                                        [ Spinners ]
 //            <--************************************************************************************************** [ Spinners ]
 
+export function Spinner_Donnut({ size = "30px", weight = "6" }) {
+  return (
+    <div
+      className="SpinnerDonnut"
+      style={{
+        width: size,
+        height: size,
+        borderWidth: weight,
+      }}
+    />
+  );
+}
+export function Spinner_DonnutRainbow({ size = "30px", weight = "6" }) {
+  return (
+    <div
+      className="SpinnerDonnutRainbow"
+      style={{
+        width: size,
+        height: size,
+      }}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 66 66"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          fill="none"
+          strokeWidth={weight}
+          strokeLinecap="round"
+          cx="33"
+          cy="33"
+          r="28"
+        ></circle>
+      </svg>
+    </div>
+  );
+}
+
 export function Spinner_Trino({ speed, size, background = "#fafafa" }) {
   const Elemento = (
     <div

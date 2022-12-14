@@ -554,6 +554,76 @@ html {
 //                 <--************************************************************************************************** [ SPINNERS ]
 //                        <--************************************************************************************************ [ SPINNERS ]
 */
+.SpinnerDonnut {
+  border-style: solid;
+  border-color: var(--c03);
+  border-top-color: var(--c05);
+  border-radius: 50%;
+  animation: spinnerdonnut 1.4s linear infinite;
+  font-weight: 800;
+}
+@keyframes spinnerdonnut {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(50deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/*  */
+
+.SpinnerDonnutRainbow svg {
+  animation: rotator 1.4s linear infinite;
+}
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.SpinnerDonnutRainbow circle {
+  stroke-dasharray: 160;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation: dash 2s ease-in-out infinite, colors 5s linear infinite;
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 160;
+  }
+  50% {
+    stroke-dashoffset: 40;
+    transform: rotate(160deg);
+  }
+  100% {
+    stroke-dashoffset: 160;
+    transform: rotate(360deg);
+  }
+}
+@keyframes colors {
+  0% {
+    stroke: #9900ff;
+  }
+  25% {
+    stroke: #ff2f52;
+  }
+  50% {
+    stroke: #f75f23;
+  }
+  75% {
+    stroke: #f7c223;
+  }
+  100% {
+    stroke: #9900ff;
+  }
+}
+
+/*  */
 
 .SpinerContainer {
   display: grid;
