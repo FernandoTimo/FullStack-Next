@@ -1,8 +1,6 @@
-import style from './SocialLogin.module.css';
+import style from "./SocialLogin.module.css";
+import { SessionProvider } from "next-auth/react";
+
 export default function SocialLogin() {
-	return (
-		<div className={style.Container}>
-			<h2>SocialLogin</h2>
-		</div>
-	);
+  return <div></div>;
 }
