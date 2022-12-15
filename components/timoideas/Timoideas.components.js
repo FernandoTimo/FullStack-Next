@@ -44,6 +44,7 @@ export function Content({
   children,
 }) {
   if (!children) console.warn("<Content></Content> sin contenido");
+
   let clases = `Content${center && " c"} ${className}`;
   return (
     <div
