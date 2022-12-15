@@ -1,0 +1,54 @@
+/* Contrae el elemento de Izquierda a Derecha */
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+/*  */
+@keyframes weas {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
+/* fese\ */
+@keyframes fese {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
+/* fesedw Lopidf soeief\ */
+@keyframes fesedw {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
+/* poner Pone todo lo que quieras */
+@keyframes poner {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
+/* Poner -> poner Pone todo lo que quieras */
+@keyframes poner {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
