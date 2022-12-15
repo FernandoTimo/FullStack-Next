@@ -67,13 +67,7 @@ export default function CalendarChart({
                   id={"_dayCharCalendar"}
                   key={index}
                 >
-                  <span
-                    className={style.CalendarDay}
-                    data-level={
-                      // random number between 0 and 4
-                      Math.floor(Math.random() * 5)
-                    }
-                  ></span>
+                  <span className={style.CalendarDay}></span>
                 </Emergente>
               ))}
             </div>

@@ -42,19 +42,19 @@
   transform: translate(0%, 50%) rotate(45deg);
   border-radius: 0 0 3px 0;
 }
-.CalendarDay[data-level="0"] {
+.CalendarDay[datalevel="0"] {
   background: var(--c05);
 }
-.CalendarDay[data-level="1"] {
+.CalendarDay[datalevel="1"] {
   background: var(--c-GraphCalendar-L1);
 }
-.CalendarDay[data-level="2"] {
+.CalendarDay[datalevel="2"] {
   background: var(--c-GraphCalendar-L2);
 }
-.CalendarDay[data-level="3"] {
+.CalendarDay[datalevel="3"] {
   background: var(--c-GraphCalendar-L3);
 }
-.CalendarDay[data-level="4"] {
+.CalendarDay[datalevel="4"] {
   background: var(--c-GraphCalendar-L4);
 }
 .CalendarDay:hover {
