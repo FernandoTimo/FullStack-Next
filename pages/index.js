@@ -6,6 +6,7 @@ import Timoideas from "public/svg/timoideas/timoideas.svg";
 import GitHub from "public/svg/global/github.svg";
 import { useState } from "react";
 import Analytics from "components/timoideas/Analytics.component";
+import AuthCard from "components/AuthCard.component";
 
 export default function Index() {
   const [serverSockets, setserverSockets] = useState();
@@ -14,8 +15,9 @@ export default function Index() {
     <>
       <Head />
       <Body>
+        <Analytics />
         <Section>
-          <Analytics />
+          <AuthCard />
           <div
             className={`${style.Container} ${serverSockets && style.Sockets}`}
           >
