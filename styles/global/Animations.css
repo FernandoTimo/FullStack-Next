@@ -52,3 +52,12 @@
 		transform: scale(1.5);
 	}
 }
+/* Oirs -> oirs Oye cuando quieras lo que quieras */
+@keyframes oirs {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
