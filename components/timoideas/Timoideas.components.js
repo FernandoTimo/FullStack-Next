@@ -44,7 +44,7 @@ export function Content({
   children,
 }) {
   if (!children) console.warn("<Content></Content> sin contenido");
-  let clases = `Content${center && " c"}${className && " " + className}`;
+  let clases = `Content${center && " c"} ${className}`;
   return (
     <div
       className={clases}
@@ -123,7 +123,7 @@ export function Modal({
     return () => setMounted(false);
   }, [show]);
 
-  const clases = `ModalContainer ${className && " " + className}`;
+  const clases = `ModalContainer ${className}`;
 
   return mounted && show
     ? reactDom.createPortal(
@@ -474,7 +474,7 @@ export function Poligon({
   sides = 8,
   bg,
 }) {
-  let clases = `Poligono${className && " " + className}`;
+  let clases = `Poligono ${className}`;
   return (
     <div className="PoligonoContainer" style={{ width: size, height: size }}>
       <div
@@ -698,7 +698,7 @@ export function Grid({
   columns = [0, 5],
   show,
 }) {
-  let clases = `Grid${center && " c"}${className && " " + className}`;
+  let clases = `Grid${center && " c"} ${className}`;
 
   // columns[0] > 0 ? console.log('mayor') : console.log('menor');
   return (
@@ -731,7 +731,7 @@ export function Scroll({
 }) {
   let clases = `Scroll ${
     scrollBar ? " ScrollBarActive" : " ScrollBarInactive"
-  }${className && " " + className}`;
+  } ${className}`;
   const refScroll = useRef();
   const childrenlength = Children.count(children);
   useEffect(() => {
@@ -777,7 +777,7 @@ export function SVG({
   onClick = () => {},
   onContextMenu = () => {},
 }) {
-  let clases = `SVGIcon${className && " " + className}`;
+  let clases = `SVGIcon ${className}`;
   return (
     <div
       className={clases}
@@ -793,7 +793,7 @@ export function SVG({
   );
 }
 export function Masonry({ gap = 1, children, className = "", columns = 5 }) {
-  const clases = `Masonry${className && " " + className}`;
+  const clases = `Masonry ${className}`;
   const [ChildrenArray, setChildrenArray] = useState([]);
   const [columnsNumber, setColumnsNumber] = useState(columns);
   const [ReadyToRender, setReadyToRender] = useState(false);
@@ -877,9 +877,7 @@ export function PopUp({
   radius = "3vh",
   direction = "bottom",
 }) {
-  let clases = `PopUp${className && " " + className}${
-    direction && " PopUp" + direction
-  }`;
+  let clases = `PopUp ${className}${direction && " PopUp" + direction}`;
   return (
     <div
       className={clases}
@@ -898,4 +896,32 @@ export function PopUp({
 export function Counter({ number = 0 }) {
   const Number = useCounter(number, 0, true, 10);
   return Number;
+}
+export function Glass({
+  children,
+  blur = "10px",
+  className = "",
+  content = (
+    <c>
+      {Array.from({ length: 4 }, (e, i) => (
+        <e key={i} />
+      ))}
+    </c>
+  ),
+}) {
+  let clases = `Glass ${className}`;
+  return (
+    <div className={clases}>
+      {children}
+      <div
+        className="GlassContent"
+        style={{
+          filter: `blur(${blur})`,
+          WebkitFilter: `blur(${blur})`,
+        }}
+      >
+        {/* {content} */}
+      </div>
+    </div>
+  );
 }
