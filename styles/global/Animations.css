@@ -115,3 +115,12 @@
 		transform: scale(1.5);
 	}
 }
+/* Oer -> animación */
+@keyframes oer {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
