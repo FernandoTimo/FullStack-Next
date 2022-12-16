@@ -40,7 +40,7 @@ export default function Index() {
                 icon={<GitHub />}
                 className={style.GitHub}
               />
-              <h2>Frontend-Next</h2>
+              <h2>Fullstack-Next</h2>
             </a>
           </div>
           <Sockets state={[serverSockets, setserverSockets]} />

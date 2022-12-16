@@ -1,21 +1,19 @@
-import database from 'database/database';
+import { Server } from "socket.io";
 
 export default async function API(req, res) {
-	const { method } = req;
-	await database();
-	switch (method) {
-		case 'GET':
-			try {
-				const sockets = 'await SocketsSchema.find()';
-				res.status(200).json(sockets);
-			} catch ({ message }) {
-				res.status(400).json({ error: message });
-			}
-			break;
-		default:
-			res.status(405).json({
-				message: 'Method not allowed',
-			});
-			break;
-	}
+  if (!res.socket.server.io) {
+    const io = new Server(res.socket.server);
+    res.socket.server.io = io;
+    io.on("connection", (socket) => {
+      console.log("a user connected");
+      socket.on("disconnect", () => {
+        console.log("user disconnected");
+      });
+      socket.on("saludar", (saludo) => {
+        console.log(saludo);
+        io.emit("saludo", saludo);
+      });
+    });
+  }
+  res.status(200).json({ message: "Connected" });
 }

@@ -9,7 +9,8 @@ import {
   Scroll,
   SVG,
 } from "components/timoideas/Timoideas.components";
-
+import io from "socket.io-client";
+let socket;
 function Sockets({ state }) {
   const [serverSockets, setserverSockets] = state;
   const [messages, setmessages] = useState({ messages: [] });
@@ -22,6 +23,15 @@ function Sockets({ state }) {
     WelcomeSockets(setserverSockets, handlerMessages);
     handlerSocketChat();
   }, []);
+  useEffect(() => socketInitializer(), []);
+  const socketInitializer = async () => {
+    await fetch("/api/socket");
+    socket = io();
+
+    socket.on("connect", () => {
+      console.log("connected");
+    });
+  };
   return (
     <div className={style.Container}>
       {serverSockets && (

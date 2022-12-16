@@ -1284,13 +1284,11 @@ html {
 .Glass {
   position: relative;
   z-index: 1;
-  background: #0effaf !important;
 }
 
 .Glass > *:nth-child(1) {
   position: relative;
   z-index: 48;
-  background: #fa0;
 }
 
 .GlassContent {
@@ -1298,7 +1296,7 @@ html {
   height: 100%;
   position: absolute;
   overflow: hidden;
-  background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+  /* background: linear-gradient(90deg, #ff4d4d, #f9cb28); */
   z-index: -1 !important;
 }
 
